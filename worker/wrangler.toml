@@ -1,0 +1,18 @@
+name = "planificateur-rappels"
+main = "src/index.ts"
+compatibility_date = "2026-10-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Chaque installation possède un jeton secret généré sur le téléphone.
+# Le service ne stocke que l'abonnement push, chiffré par le navigateur :
+# heure + titre envoyés, rien d'autre.
+[[kv_namespaces]]
+binding = "REMINDERS"
+id = "REMPLACEZ_PAR_L_ID_KV"
+
+# Rien de secret dans ce fichier (R5) :
+#   npx wrangler secret put VAPID_PUBLIC_KEY
+#   npx wrangler secret put VAPID_PRIVATE_KEY
+#   npx wrangler secret put VAPID_SUBJECT   (ex. mailto:toi@example.com)
+[vars]
+ENVIRONMENT = "production"
