@@ -31,7 +31,7 @@ jobs:
         run: npm run size
 
   worker:
-    name: Service de rappels (typecheck)
+    name: Service de rappels (typecheck, tests)
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -45,6 +45,8 @@ jobs:
           cache-dependency-path: worker/package-lock.json
       - run: npm ci
       - run: npm run typecheck
+      - name: Tests du service de rappels
+        run: npm test
 
   e2e:
     name: End-to-end (Playwright)

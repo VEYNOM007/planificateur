@@ -22,8 +22,13 @@ playwright/.cache
 .env
 .env.*
 !.env.example
+.dev.vars
+.dev.vars.*
 wrangler.secrets.json
 *.pem
+
+# Wrangler (état local du worker)
+.wrangler/
 
 # Editor directories and files
 .vscode/*

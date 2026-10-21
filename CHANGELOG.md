@@ -76,6 +76,33 @@ Toutes les étapes notables, jalon par jalon, selon le cahier des charges.
 
 - `npm run verify` : typecheck, lint, tests, build et poids gzip au vert.
 
+## [0.1.0] — Service de rappels (préparation du test sur téléphone) — 2026-10-21
+
+### Ajouté
+
+- Envoi différé de la notification de test : `POST /v1/test-push` accepte
+  `delaySeconds` (0 à 25 s) et répond `202` avant de partir, ce qui permet de
+  fermer l'application juste après l'appel HTTP et de vérifier l'arrivée de la
+  notification application fermée.
+- Champ « délai avant envoi » (15 s par défaut) sur la page temporaire
+  `push-test.html`.
+- Origines CORS restreintes à `http://localhost:5173` et
+  `https://veynom007.github.io` : préflight `OPTIONS` (`content-type`,
+  `x-installation-token`), `403` sans en-tête CORS pour toute autre origine.
+- Corps de requête limité à 4 ko (`413` au-delà) et abonnement stocké dans KV
+  expiré au bout de 90 jours.
+- Treize tests du service de rappels, exécutés par la CI.
+
+### Vérifications
+
+- `npm run verify` : typecheck, lint, tests, build et poids gzip au vert.
+- `worker/` : `npm run typecheck` et `npm test` (13 tests) au vert.
+- Compatibilité de `web-push` avec workerd (`nodejs_compat`) vérifiée : signature
+  VAPID, chiffrement et appel HTTPS au service de push opérationnels.
+- **Déploiement du worker à faire par Moussa** : `wrangler login`, création de
+  l'espace KV `REMINDERS`, `wrangler deploy`, puis `wrangler secret put` pour
+  les trois secrets.
+
 ## À venir
 
 - Suite de J2 : gestes de manipulation des blocs (déplacement,
