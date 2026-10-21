@@ -105,6 +105,12 @@ Toutes les étapes notables, jalon par jalon, selon le cahier des charges.
 
 ## À venir
 
+- **J6 — réabonnement régulier au service de rappels** : les abonnements
+  push stockés dans KV expirent au bout de 90 jours. L'application doit
+  donc réenregistrer son abonnement (POST `/v1/subscribe`) périodiquement —
+  à chaque démarrage et avant l'échéance — sinon les rappels cesseraient
+  d'arriver. Le jeton d'installation reste inchangé, seul l'abonnement push est
+  réécrit.
 - Suite de J2 : gestes de manipulation des blocs (déplacement,
   redimensionnement), molette d'heure et glissement horizontal entre les jours.
 - Jalons suivants du cahier des charges (tâches, modèles, réglages).
