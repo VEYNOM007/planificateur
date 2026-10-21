@@ -5,7 +5,17 @@ import tseslint from 'typescript-eslint';
 import prettier from 'eslint-config-prettier';
 
 export default tseslint.config(
-  { ignores: ['dist', 'coverage', 'node_modules', 'worker'] },
+  {
+    ignores: [
+      'dist',
+      'coverage',
+      'node_modules',
+      'worker',
+      'playwright-report',
+      'test-results',
+      'blob-report',
+    ],
+  },
   js.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
   {
@@ -19,7 +29,18 @@ export default tseslint.config(
     languageOptions: { globals: globals.serviceworker },
   },
   {
+    files: ['tests/e2e/**/*.ts', 'playwright.config.ts'],
+    languageOptions: {
+      globals: globals.node,
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
+  {
     files: ['**/*.{ts,tsx}'],
+    ignores: ['tests/e2e/**/*.ts', 'playwright.config.ts'],
     languageOptions: {
       ecmaVersion: 2023,
       globals: { ...globals.browser, ...globals.serviceworker },

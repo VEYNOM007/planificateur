@@ -12,6 +12,11 @@ dist
 dist-ssr
 coverage
 *.local
+playwright-report
+test-results
+blob-report
+playwright/.cache
+*.tsbuildinfo
 
 # Secrets : jamais committés (R5)
 .env
